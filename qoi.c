@@ -5,8 +5,8 @@ int main(int argc, char * argv[]){
         printf("Only .ppm and .qoi formats supported.");
     }
 
-    for (int file_number = 0; file_number < argc; file_number++) {
-
+    for (int file_number = 1; file_number <= argc; file_number++) {
+        const char * FILENAME = argv[file_number];
     }
     return 0;
 }
