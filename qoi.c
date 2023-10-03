@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 
+// format: R, G, B, A
+struct Pixel {
+    int R, G, B, A;
+};
+
 void print_help() {
     printf("Usage: qoi [options] FILE \n\n");
     printf("-f                  Display supported formats.\n");
@@ -37,15 +42,16 @@ void complain_no_infile() {
 */
 int main(int argc, char * argv[]){
     if (argc < 2) {
-        complain_args();  
-        return 1;      
+        complain_args();
+        return 1;
     }
 
-    char * infile, * outfile;
+    char * infilename = NULL,
+         * outfile = NULL;
 
     // Handle arguments
     for (int i = 1; i < argc; i++) {
-    
+
         if (argv[i][0] == '-') {
 
             // When there is no option after '-'
@@ -80,16 +86,18 @@ int main(int argc, char * argv[]){
 
         } else {
 
-            infile = argv[i];
-        } 
+            infilename = argv[i];
+        }
     }
 
-    if (!infile) {
+    if (!infilename) {
         complain_no_infile();
         return 1;
     }
 
-    
+    FILE * INFILE = fopen(infilename, "r");
+
+    fclose(INFILE);
 
     return 0;
 }
